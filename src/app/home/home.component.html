@@ -1,0 +1,30 @@
+<div class="m-5 border rounded shadow-lg">
+  <header class="d-flex flex-column justify-content-center">
+    <h1 class="text-center m-3">Quicklists</h1>
+    <button class="m-auto my-5 btn-success rounded col-2" (click)="checklistBeingEdited.set({})">+ Add Checklist</button>
+  </header>
+
+  <app-modal [isOpen]="!!checklistBeingEdited()">
+    <ng-template>
+      <app-form-modal
+        [title]="
+              checklistBeingEdited()?.title
+                ? checklistBeingEdited()!.title!
+                : 'Add Checklist'
+            "
+        [formGroup]="checklistForm"
+        (close)="checklistBeingEdited.set(null)"
+        (save)="onSaveCheckList()"
+      />
+    </ng-template>
+  </app-modal>
+
+  <section class="mx-5">
+    <h2>Your checklists</h2>
+    <app-checklist-list
+      [checklists]="checklistService.checklists()"
+      (delete)="checklistService.remove$.next($event)"
+      (edit)="checklistBeingEdited.set($event)"
+    />
+  </section>
+</div>

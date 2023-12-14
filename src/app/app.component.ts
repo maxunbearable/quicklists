@@ -7,12 +7,8 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
     <router-outlet></router-outlet>
   `,
   styles: [],
 })
-export class AppComponent {
-  title = 'angular-quicklists';
-}
+export class AppComponent { }

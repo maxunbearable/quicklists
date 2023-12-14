@@ -1,0 +1,24 @@
+<div class="shadow-lg border round m-5">
+  <header class="m-3 d-flex align-items-center">
+    <h2>{{ title }}</h2>
+  </header>
+  <section>
+    <form class="m-3" [formGroup]="formGroup" (ngSubmit)="save.emit(); close.emit()">
+      @for (control of formGroup.controls | keyvalue; track control.key) {
+      <div>
+        <label [for]="control.key" class="mx-2">{{ control.key | uppercase }}</label>
+            <input
+            class="col-3"
+              [id]="control.key"
+              type="text"
+              [formControlName]="control.key"
+            />
+          </div>
+      }
+      <button class="m-3 btn-success btn col-1" type="submit">Save</button>
+      <button class="btn-danger btn" (click)="close.emit()">Close</button>
+
+    </form>
+  </section>
+</div>
+
